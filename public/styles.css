@@ -1,0 +1,63 @@
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:xx-large;
+    font-weight: 500;   
+    color:#1ee481;
+}
+
+form {
+    text-align: center;
+}
+
+button{
+    background-color: #0b8f4d;
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+}
+
+h2{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1ee481;
+}
+
+p{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+footer{
+    background-color: gray;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+header{
+    background-color: gray;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    font-size: xx-large;
+    text-align: center;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Der folgende Style wirkt auf eine class namens flex-container 
+eine Class wird in der styles.css immer mit einem führenden Punkt dargestellt.*/
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: DodgerBlue;    
+  }
+  /* Der folgende Style wirkt auf ale DIVs innerhalb eines flex-containers*/
+  .flex-container > div {
+    background-color: #1ee481;
+    width: 100%;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+  }

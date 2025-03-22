@@ -1,0 +1,36 @@
+<!--HTML-Grundgerüst über die Eingabe von html und dann html:5 auswählen-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <!--Der Titel steht im Browsertab-->
+    <title>Borken-Bank - Login</title>
+</head>
+<body>
+    <!--Der haeder soll die Seite strukturieren und bekommt entsprechende Styles zugwiesen-->
+    <header>
+        <!--Überschrift der Seite-->
+        <h1>Herzlich Willkommen bei der Borken-Bank</h1>
+    </header>
+    <!--Formularfelder (Textboxen, Button etc.) müssen in form-Tags eingebettet werden-->
+    <form method="post">
+        <!--Die Labels beschreiben die Textboxen. br bricht die Zeile um.-->
+        <label>Benutzername</label><br>
+        <input name="IdKunde"><br>
+        <label>Kennwort</label><br>
+        <!--type password maskiert die Eingabe mit Sternchen-->
+        <input type="password" name="Kennwort"><br>
+        <button formaction="/login">Einloggen</button>
+    </form>
+
+    <p><%= Meldung %></p>
+
+<footer>
+    <p>Borken-Bank AG</p>
+    <p>Geschäftsführer: Hans Dampf, IBAN: DE 55 28 000 000</p>
+    <a href="https://www.borken-bank.de">Zur Homepage</a> 
+</footer>
+</body>
+</html>
