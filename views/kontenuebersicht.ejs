@@ -20,8 +20,17 @@
         <a href="agb"><i class="fa-solid fa-file-lines"></i> AGB</a>
         <a href="login"><i class="fa fa-sign-out"></i> Abmelden</a>
     </header>
+
     <main>
-        <H1>Kontenübersicht</H1>
+
+    <form method="post">
+        <label>Geben Sie Ihre gewünschte Kontonummer ein:</label></br>
+        <input type="number" min="0" name="Kontonummer" value=<%= Kontonummer %>></br>
+        <button type="submit" formaction="/kontouebersicht">Konto anlegen</button>
+    </form>
+    
+    <p><%= Meldung %></p>
+
     </main>
 
     <footer>

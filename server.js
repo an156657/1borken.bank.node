@@ -21,6 +21,7 @@ kunde.Benutzername = "pk"
 kunde.Kennwort = "123"
 kunde.IstEingeloggt = false
 
+
 // Klassenefinition des Kundenberaters
 class Kundenberater{
 	constructor(){
@@ -202,6 +203,21 @@ app.get('/kontenuebersicht', (req, res) => {
 			Meldung: "Melden Sie sich zuerst an."
 		});
 	}
+});
+
+app.post('/kontenuebersicht', (req, res) => {
+	
+	let kontonummer = req.body.Kontonummer;
+	console.log("kontenuebersicht: Kontonummer: " + kontonummer)
+	let bankleitzahl = 47264854
+	console.log("kontenuebersicht: Bankleitzahl: " + bankleitzahl)
+	let länderkennung = "DE"
+	console.log("kontenuebersicht: Länderkennung: " + länderkennung)
+	let prüfziffer = 12
+	console.log("kontenuebersicht: Prüfungsziffer: " + ptüfungsziffer)
+
+	
+
 });
 
 app.get('/profil', (req, res) => {
