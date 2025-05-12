@@ -99,6 +99,92 @@ const PORT = 3000;
 // Der Wert '0.0.0.0' wird zugewiesen an eine Konstante namens HOST 
 const HOST = '0.0.0.0';
 
+// Importiert das SQLite3-Modul und aktiviert den "verbose"-Modus, um detaillierte Debugging-Informationen zu erhalten.
+const sqlite3 = require('sqlite3').verbose();
+
+// Verbindung zur SQLite-Datenbank herstellen (oder erstellen, falls sie nicht existiert)
+const db = new sqlite3.Database('./bank.db', (err) => {
+    if (err) {
+        console.error('Fehler beim Verbinden mit der Datenbank:', err.message);
+    } else {
+        console.log('Verbindung zur SQLite-Datenbank hergestellt.');
+    }
+});
+
+// Tabelle "Kunden" erstellen(wird angelegt, mit dem Befehl CREATE TABLE)
+// Wenn die Tabelle bereits existiert, wird sie nicht erneut erstellt.
+// If not exists ist eine Abfrage, die sicherstellt, dass die Tabelle nur einmal erstellt wird.
+// Primary key ist der Primärschlüssel der Tabelle. Der Primärschlüssel ist dajenige Attribut, das den Datensatz eindeutig
+// identifiziert. 
+// Der Primärschlüssel ist eine Kombination aus dem Attribut KundenNr und dem Attribut Benutzername.
+// Autoincrement sorgt dafür, dass der Primärschlüssel automatisch hochgezählt wird.
+// Für jedes Atribut, das in der Tabelle gespeichert werden soll, wird ein Datentyp angegeben.
+// Der Datentyp INTEGER ist eine Ganzzahl. Das bedeutet, dass nur ganze Zahlen gespeichert werden können.
+// Not null bedeutet, dass das Attribut nicht leer sein darf.
+// Text ist ein Textfeld, in dem beliebige Zeichen gespeichert werden können.
+// Unique bedeutet, dass der Wert des Attributs nur einmal in der Tabelle vorkommen darf.
+db.serialize(() => {
+    db.run(`
+        CREATE TABLE IF NOT EXISTS Kunden (
+            KundenNr INTEGER PRIMARY KEY AUTOINCREMENT,
+            Nachname TEXT NOT NULL,
+            Vorname TEXT NOT NULL,
+            Wohnort TEXT NOT NULL,
+            Postleitzahl TEXT NOT NULL,
+            Straße TEXT NOT NULL,
+            Kennwort TEXT NOT NULL,
+            Benutzername TEXT NOT NULL UNIQUE
+        )
+    `, (err) => {
+        if (err) {
+            console.error('Fehler beim Erstellen der Tabelle:', err.message);
+        } else {
+            console.log('Tabelle "Kunden" erfolgreich erstellt oder existiert bereits.');
+        }
+    });
+
+    // Beispielkunde einfügen
+	// Mit Insert into wird ein Datensatz in die Tabelle eingefügt.
+	// Die Werte werden in der gleichen Reihenfolge angegeben, wie sie in der Tabelle gespeichert werden.
+    const insertQuery = `
+        INSERT INTO Kunden (Nachname, Vorname, Wohnort, Postleitzahl, Straße, Kennwort, Benutzername)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    `;
+    const beispielKunde = ['Kiff', 'Pitt', 'Berlin', '10115', 'Hauptstraße 1', '123', 'pk'];
+
+    db.run(insertQuery, beispielKunde, function (err) {
+        if (err) {
+            console.error('Fehler beim Einfügen des Kunden:', err.message);
+        } else {
+            console.log(`Neuer Kunde mit KundenNr ${this.lastID} erfolgreich hinzugefügt.`);
+        }
+    });
+});
+
+db.serialize(() => {
+    const selectQuery = `SELECT * FROM Kunden`;
+
+    db.all(selectQuery, [], (err, rows) => {
+        if (err) {
+            console.error('Fehler beim Abrufen der Kundendaten:', err.message);
+        } else {
+            console.log('Kundendaten als Tabelle:');
+            console.table(rows); // Gibt die Daten als Tabelle im Terminal aus
+        }
+    });
+});
+
+// Verbindung zur Datenbank schließen
+db.close((err) => {
+    if (err) {
+        console.error('Fehler beim Schließen der Datenbank:', err.message);
+    } else {
+        console.log('Datenbankverbindung geschlossen.');
+    }
+});
+
+
+
 // App
 
 const app = express();
@@ -477,6 +563,7 @@ app.post('/login', (req, res) => {
 		});
 	}
 });
+
 
 
 
