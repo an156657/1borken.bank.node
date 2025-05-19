@@ -94,7 +94,7 @@ validator.validate("test@email.com"); // true
 // zugewiesen an die Konstante namens PORT. Das einfache Gleichheitszeichen lässt sich also übersetzen
 // mit "... wird zugewiesen an ..."
 
-const PORT = 3000;
+const PORT = 5000;
 
 // Der Wert '0.0.0.0' wird zugewiesen an eine Konstante namens HOST 
 const HOST = '0.0.0.0';
@@ -174,14 +174,6 @@ db.serialize(() => {
     });
 });
 
-// Verbindung zur Datenbank schließen
-db.close((err) => {
-    if (err) {
-        console.error('Fehler beim Schließen der Datenbank:', err.message);
-    } else {
-        console.log('Datenbankverbindung geschlossen.');
-    }
-});
 
 
 
@@ -584,3 +576,5 @@ console.log(`Running on http://${HOST}:${PORT}`);
 //require('./uebungen/03-objekte.js');
 //require('./klausuren/klausur20240930.js');
 //require('./uebungen/04-funktionen.js');
+
+
