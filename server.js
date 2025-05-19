@@ -99,12 +99,16 @@ const PORT = 5000;
 // Der Wert '0.0.0.0' wird zugewiesen an eine Konstante namens HOST 
 const HOST = '0.0.0.0';
 
+// Das SQL Modul muss mit nmp install im terminal istalliert weden
 // Importiert das SQLite3-Modul und aktiviert den "verbose"-Modus, um detaillierte Debugging-Informationen zu erhalten.
 const sqlite3 = require('sqlite3').verbose();
 
 // Verbindung zur SQLite-Datenbank herstellen (oder erstellen, falls sie nicht existiert)
 const db = new sqlite3.Database('./bank.db', (err) => {
-    if (err) {
+    // Wenn err ungleich Null ist, dann wird die Fehlermeldung ausgegeben
+	// Wenn err gleich Null ist, dann wird die Verbindung zur Datenbank hergestellt.
+
+	if (err) {
         console.error('Fehler beim Verbinden mit der Datenbank:', err.message);
     } else {
         console.log('Verbindung zur SQLite-Datenbank hergestellt.');
